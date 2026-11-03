@@ -1,0 +1,113 @@
+{
+  "implementation": "02_triton",
+  "language_paradigm": "PyTorch + Custom Triton Kernels (@triton.jit)",
+  "gpu_name": "NVIDIA A100-SXM4-40GB",
+  "device": "cuda",
+  "train_time_s": 474.7264058489998,
+  "train_tokens_per_sec": 172562.55179969277,
+  "eval_time_s": 30.103241605999756,
+  "warmup_time_s": 4.801338654999881,
+  "infer_b1_time_s": 6.49449552100009,
+  "infer_b1_tokens_per_sec": 153.97654779597255,
+  "infer_b1_latency_ms_per_token": 6.49449552100009,
+  "infer_b64_time_s": 23.556568096999854,
+  "infer_b64_tokens_per_sec": 2716.8643469823173,
+  "peak_vram_mb": 2240.44921875,
+  "final_train_loss": 0.19176750868558884,
+  "final_val_loss": 3.6778299713134768,
+  "sloc_core": 704,
+  "sloc_harness": 308,
+  "sloc_total": 1012,
+  "sanity_check": {
+    "loss_step_0": 4.175148963928223,
+    "golden_loss_step_0": 4.175148963928223,
+    "loss_step_0_diff": 0.0,
+    "loss_step_1": 3.5876784324645996,
+    "golden_loss_step_1": 3.5876753330230713,
+    "loss_step_1_diff": 3.0994415283203125e-06,
+    "passed": true
+  },
+  "training": {
+    "max_iters": 5000,
+    "warmup_iters": 50,
+    "warmup_time_s": 4.801338654999881,
+    "wall_time_s": 474.7264058489998,
+    "eval_wall_time_s": 30.103241605999756,
+    "total_tokens": 81920000,
+    "throughput_tok_s": 172562.55179969277,
+    "final_train_loss": 0.19176750868558884,
+    "final_val_loss": 3.6778299713134768
+  },
+  "inference": {
+    "gen_tokens": 1000,
+    "batch_1": {
+      "wall_time_s": 6.49449552100009,
+      "throughput_tok_s": 153.97654779597255,
+      "latency_ms_per_token": 6.49449552100009
+    },
+    "batch_64": {
+      "wall_time_s": 23.556568096999854,
+      "throughput_tok_s": 2716.8643469823173
+    }
+  },
+  "memory": {
+    "peak_vram_mb": 2240.44921875
+  },
+  "loss_history": [
+    {
+      "step": 0,
+      "train_loss": 4.173479080200195,
+      "val_loss": 4.169190111160279
+    },
+    {
+      "step": 500,
+      "train_loss": 1.5649957966804504,
+      "val_loss": 1.7384272384643555
+    },
+    {
+      "step": 1000,
+      "train_loss": 1.254720027446747,
+      "val_loss": 1.539265661239624
+    },
+    {
+      "step": 1500,
+      "train_loss": 1.0817062783241271,
+      "val_loss": 1.5785833382606507
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.878367327451706,
+      "val_loss": 1.7573652791976928
+    },
+    {
+      "step": 2500,
+      "train_loss": 0.6542962157726288,
+      "val_loss": 2.0734912300109865
+    },
+    {
+      "step": 3000,
+      "train_loss": 0.4460030323266983,
+      "val_loss": 2.463933753967285
+    },
+    {
+      "step": 3500,
+      "train_loss": 0.30956477761268614,
+      "val_loss": 2.8740035772323607
+    },
+    {
+      "step": 4000,
+      "train_loss": 0.24310154020786284,
+      "val_loss": 3.2055911731719973
+    },
+    {
+      "step": 4500,
+      "train_loss": 0.20419325590133666,
+      "val_loss": 3.4659070634841918
+    },
+    {
+      "step": 4999,
+      "train_loss": 0.19176750868558884,
+      "val_loss": 3.6778299713134768
+    }
+  ]
+}

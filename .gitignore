@@ -2,3 +2,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 implementations/03_cuda_cpp/gpt_cuda
+*.aux
+*.log
+*.out
+*.synctex.gz

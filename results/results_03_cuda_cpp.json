@@ -1,0 +1,113 @@
+{
+  "implementation": "03_cuda_cpp",
+  "language_paradigm": "Native C++/CUDA + cuBLAS",
+  "gpu_name": "NVIDIA A100-SXM4-40GB",
+  "device": "cuda:0",
+  "train_time_s": 493.394775,
+  "train_tokens_per_sec": 166033.38,
+  "eval_time_s": 31.841092,
+  "warmup_time_s": 4.934572,
+  "infer_b1_time_s": 1.999999,
+  "infer_b1_tokens_per_sec": 500.0,
+  "infer_b1_latency_ms_per_token": 2.0,
+  "infer_b64_time_s": 25.21203,
+  "infer_b64_tokens_per_sec": 2538.47,
+  "peak_vram_mb": 5611.94,
+  "final_train_loss": 0.192468,
+  "final_val_loss": 3.606448,
+  "sanity_check": {
+    "loss_step_0": 4.175149,
+    "golden_loss_step_0": 4.175149,
+    "loss_step_0_diff": 0.0,
+    "loss_step_1": 3.587678,
+    "golden_loss_step_1": 3.587675,
+    "loss_step_1_diff": 2.62e-06,
+    "passed": true
+  },
+  "training": {
+    "max_iters": 5000,
+    "warmup_iters": 50,
+    "warmup_time_s": 4.934572,
+    "wall_time_s": 493.394775,
+    "eval_wall_time_s": 31.841092,
+    "total_tokens": 81920000,
+    "throughput_tok_s": 166033.38,
+    "final_train_loss": 0.192468,
+    "final_val_loss": 3.606448
+  },
+  "inference": {
+    "gen_tokens": 1000,
+    "batch_1": {
+      "wall_time_s": 1.999999,
+      "throughput_tok_s": 500.0,
+      "latency_ms_per_token": 2.0
+    },
+    "batch_64": {
+      "wall_time_s": 25.21203,
+      "throughput_tok_s": 2538.47
+    }
+  },
+  "memory": {
+    "peak_vram_mb": 5611.94
+  },
+  "loss_history": [
+    {
+      "step": 0,
+      "train_loss": 4.173479,
+      "val_loss": 4.16919
+    },
+    {
+      "step": 500,
+      "train_loss": 1.569203,
+      "val_loss": 1.741143
+    },
+    {
+      "step": 1000,
+      "train_loss": 1.257991,
+      "val_loss": 1.5402
+    },
+    {
+      "step": 1500,
+      "train_loss": 1.079992,
+      "val_loss": 1.584604
+    },
+    {
+      "step": 2000,
+      "train_loss": 0.884632,
+      "val_loss": 1.740164
+    },
+    {
+      "step": 2500,
+      "train_loss": 0.649657,
+      "val_loss": 2.06641
+    },
+    {
+      "step": 3000,
+      "train_loss": 0.4437,
+      "val_loss": 2.437914
+    },
+    {
+      "step": 3500,
+      "train_loss": 0.30616,
+      "val_loss": 2.840492
+    },
+    {
+      "step": 4000,
+      "train_loss": 0.245984,
+      "val_loss": 3.200743
+    },
+    {
+      "step": 4500,
+      "train_loss": 0.207515,
+      "val_loss": 3.427856
+    },
+    {
+      "step": 4999,
+      "train_loss": 0.192468,
+      "val_loss": 3.606448
+    }
+  ],
+  "sloc_core": 1032,
+  "sloc_harness": 369,
+  "sloc_total": 1401
+}

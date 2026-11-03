@@ -114,69 +114,87 @@ def aggregate_all(
         "\n".join(tex_lines) + "\n", encoding="utf-8"
     )
 
+    label_map = {
+        "01_pytorch": "PyTorch eager",
+        "02_triton": "PyTorch + Triton",
+        "03_cuda_cpp": "CUDA C++ + cuBLAS",
+    }
+
     # Plot 1: Throughput comparison
-    fig, axes = plt.subplots(1, 3, figsize=(14, 4.5))
+    fig, axes = plt.subplots(1, 3, figsize=(13, 4.2))
     names = [r["implementation"] for r in records] or ["none"]
+    display_names = [label_map.get(n, n) for n in names]
     train_tps = [_extract_metric(r, "train_tokens_per_sec") for r in records] or [0.0]
     b1_tps = [_extract_metric(r, "infer_b1_tokens_per_sec") for r in records] or [0.0]
     b64_tps = [_extract_metric(r, "infer_b64_tokens_per_sec") for r in records] or [0.0]
     colors = ["#ff6b8b", "#4ecdc4", "#45b7d1"][: len(names)]
 
-    axes[0].bar(names, train_tps, color=colors)
-    axes[0].set_title("Training Throughput (tokens/s)")
-    axes[0].set_ylabel("Tokens / sec")
+    axes[0].bar(display_names, train_tps, color=colors, width=0.6)
+    axes[0].set_title("Treinamento (tokens/s)", fontsize=11, fontweight="bold")
+    axes[0].set_ylabel("Tokens / segundo", fontsize=10)
     axes[0].grid(axis="y", linestyle="--", alpha=0.5)
 
-    axes[1].bar(names, b1_tps, color=colors)
-    axes[1].set_title("Inference B=1 Throughput (tokens/s)")
+    axes[1].bar(display_names, b1_tps, color=colors, width=0.6)
+    axes[1].set_title("Inferência Lote 1 (tokens/s)", fontsize=11, fontweight="bold")
     axes[1].grid(axis="y", linestyle="--", alpha=0.5)
 
-    axes[2].bar(names, b64_tps, color=colors)
-    axes[2].set_title("Inference B=64 Throughput (tokens/s)")
+    axes[2].bar(display_names, b64_tps, color=colors, width=0.6)
+    axes[2].set_title("Inferência Lote 64 (tokens/s)", fontsize=11, fontweight="bold")
     axes[2].grid(axis="y", linestyle="--", alpha=0.5)
 
+    for ax in axes:
+        ax.tick_params(axis="x", rotation=12, labelsize=9)
+
     fig.tight_layout()
-    fig.savefig(out_path / "throughput_comparison.png", dpi=150)
+    fig.savefig(out_path / "throughput_comparison.png", dpi=300)
     plt.close(fig)
 
     # Plot 2: Pareto SLOC vs Training Throughput
-    fig, ax = plt.subplots(figsize=(7, 5))
+    fig, ax = plt.subplots(figsize=(6.5, 4.5))
     for idx, r in enumerate(records):
         x_val = r["sloc_core"]
         y_val = _extract_metric(r, "train_tokens_per_sec")
-        ax.scatter(x_val, y_val, s=120, label=r["implementation"])
+        impl_name = label_map.get(r["implementation"], r["implementation"])
+        color = colors[idx % len(colors)]
+        ax.scatter(x_val, y_val, s=130, label=impl_name, color=color, zorder=3)
         ax.annotate(
-            r["implementation"],
+            impl_name,
             (x_val, y_val),
             textcoords="offset points",
             xytext=(8, 6),
+            fontweight="bold",
+            fontsize=9,
         )
-    ax.set_xlabel("Core Implementation Complexity (SLOC)")
-    ax.set_ylabel("Training Throughput (tokens/s)")
-    ax.set_title("Complexity (SLOC) vs. Training Throughput")
+    ax.set_xlabel("Complexidade do Núcleo (SLOC)", fontsize=10)
+    ax.set_ylabel("Vazão de Treinamento (tokens/s)", fontsize=10)
+    ax.set_title("Fronteira de Pareto: SLOC vs. Vazão de Treino", fontsize=11, fontweight="bold")
     ax.grid(True, linestyle="--", alpha=0.5)
     if records:
-        ax.legend()
+        ax.legend(frameon=True, fontsize=9)
     fig.tight_layout()
-    fig.savefig(out_path / "pareto_sloc_vs_throughput.png", dpi=150)
+    fig.savefig(out_path / "pareto_sloc_vs_throughput.png", dpi=300)
     plt.close(fig)
 
     # Plot 3: Loss Convergence
-    fig, ax = plt.subplots(figsize=(8, 5))
-    for r in records:
+    fig, ax = plt.subplots(figsize=(7, 4.5))
+    has_history = False
+    for idx, r in enumerate(records):
         history = r.get("loss_history", [])
         if history:
+            has_history = True
             steps = [pt["step"] for pt in history]
             val_losses = [pt.get("val_loss", pt.get("train_loss", 0.0)) for pt in history]
-            ax.plot(steps, val_losses, marker="o", label=f"{r['implementation']} (val)")
-    ax.set_xlabel("Training Step")
-    ax.set_ylabel("Cross-Entropy Loss")
-    ax.set_title("Validation Loss Convergence Parity")
+            impl_name = label_map.get(r["implementation"], r["implementation"])
+            color = colors[idx % len(colors)]
+            ax.plot(steps, val_losses, marker="o", markersize=4, label=f"{impl_name} (val)", color=color)
+    ax.set_xlabel("Passos de Treinamento", fontsize=10)
+    ax.set_ylabel("Perda de Entropia Cruzada", fontsize=10)
+    ax.set_title("Convergência da Perda de Validação", fontsize=11, fontweight="bold")
     ax.grid(True, linestyle="--", alpha=0.5)
-    if records:
-        ax.legend()
+    if has_history:
+        ax.legend(frameon=True, fontsize=9)
     fig.tight_layout()
-    fig.savefig(out_path / "loss_convergence.png", dpi=150)
+    fig.savefig(out_path / "loss_convergence.png", dpi=300)
     plt.close(fig)
 
     summary = {

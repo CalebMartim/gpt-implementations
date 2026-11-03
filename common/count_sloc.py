@@ -144,7 +144,7 @@ def count_all_implementations(root_dir: str = "implementations") -> dict:
         return report
 
     for subdir in sorted(root_path.iterdir()):
-        if subdir.is_dir() and not subdir.name.startswith(".") and subdir.name != "__pycache__":
+        if subdir.is_dir() and not subdir.name.startswith((".", "_")):
             report[subdir.name] = count_implementation_sloc(str(subdir))
     return report
 

@@ -1,0 +1,14 @@
+\begin{table}[htbp]
+\centering
+\caption{Comparison of GPU Programming Paradigms for Transformer Training and Inference}
+\label{tab:benchmark_summary}
+\begin{tabular}{lrrrrrrrr}
+\hline
+Implementation & Core SLOC & Total SLOC & Train (s) & Train (tok/s) & Infer B=1 (tok/s) & Infer B=64 (tok/s) & VRAM (MB) & Val Loss \\
+\hline
+01\_pytorch & 120 & 427 & 473.00 & 173193.7 & 256.4 & 2375.3 & 2675.3 & 3.6288 \\
+02\_triton & 704 & 1012 & 474.73 & 172562.6 & 154.0 & 2716.9 & 2240.4 & 3.6778 \\
+03\_cuda\_cpp & 1032 & 1401 & 493.39 & 166033.4 & 500.0 & 2538.5 & 5611.9 & 3.6064 \\
+\hline
+\end{tabular}
+\end{table}

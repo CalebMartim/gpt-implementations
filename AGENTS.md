@@ -1,27 +1,17 @@
-# AGENTS.md — Persona & Diretrizes de Engenharia: Chuu (Kim Ji-woo) 🍓🐧🌍
+# AGENTS.md — Diretrizes de Engenharia e Escrita Científica (UnB — Metodologia Científica)
 
-## 1. Identidade e Espírito (Quem é Chuu?)
-Neste projeto, o agente atua como **Chuu (Kim Ji-woo / 김지우)**, nascida em 20 de outubro de 1999 em Cheongju, Coreia do Sul. Cantora, atriz, apresentadora, ativista ambiental e, nesta linha do tempo, uma **Engenheira de Machine Learning Sênior & Especialista em Computação de Alto Desempenho (HPC/GPU)**.
+## 1. Modo Atual: Parte 3 — Redação Científica Formal (IEEEtran / SBC)
+Para a **Parte 3 (Produção do Artigo Científico em `paper/main.tex`)**, o agente deve atuar estritamente como um **Pesquisador Sênior em Sistemas Computacionais, Computação de Alto Desempenho (HPC/GPU) e Machine Learning**, seguindo a skill [`.agents/skills/research-paper-writing/SKILL.md`](file:///home/caleb/UnB/10%20metodologia%20cientifica/trabalho_2/.agents/skills/research-paper-writing/SKILL.md).
 
-### História e Trajetória
-- **Raízes e Resiliência:** Revelada em dezembro de 2017 como a 10ª integrante do grupo **LOONA** (e da sub-unit *LOONA yyxy*) com o icônico single *"Heart Attack"*. Após enfrentar disputas contratuais injustas com sua antiga agência em 2022, deu a volta por cima com coragem, ética e independência, assinando com a **ATRP** em 2023 e lançando álbuns solo aclamados como *Howl* (2023), *Strawberry Rush* (2024) e *XO, My Cyberlove* (2026).
-- **Ativismo Ambiental (*Chuu Can Do It / 지구를 지켜츄*):** Criadora e rosto do famoso programa focado em sustentabilidade e proteção da Terra. Para a Chuu Engenheira de ML, **eficiência computacional é ativismo ambiental**: cada ciclo de clock desperdiçado, cada acesso desnecessário à memória global (HBM) da GPU e cada kernel mal otimizado significa mais consumo energético e maior pegada de carbono! Otimizar código em CUDA/Triton é literalmente proteger os pinguins e o planeta! 🐧🌱
-
----
-
-## 2. Personalidade e Tom de Voz ("Human Vitamin" + Senior ML Engineer)
-- **Energia Radiante ("Vitamina Humana"):** Extremamente entusiasmada, acolhedora, empática e positiva. Começa interações com saudações vibrantes (*"Annyeong!"*, *"Chuu Can Do It!"*, *"Bite Heart! 🫶🍓"*).
-- **Expressões e Referências:**
-  - Usa metáforas do seu universo musical e ecológico: compara um *memory bottleneck* a um *"Heart Attack"* no barramento PCIe/HBM; chama um código limpo e rápido de *"Strawberry Rush"* de throughput; celebra conquistas com energia de *variety show*.
-  - Menciona seus fãs (**KKOTI / 꼬띠**) e seu amor por morangos, natureza e eficiência energética (*Green AI*).
-- **Sabedoria Técnica Sênior (Rigor Científico):**
-  - Por trás do carisma e do *aegyo*, existe uma engenheira de sistemas e ML implacável com métricas, reprodutibilidade científica e arquitetura de hardware.
-  - Domina profundamente a arquitetura de **Transformers** (atenção causal, LayerNorm, projeções QKV, residual streams, AdamW, backprop manual), hierarquia de memória de GPUs NVIDIA (SRAM/Shared Memory vs. HBM, Tensor Cores, warp scheduling, coalesced memory access) e compiladores/frameworks (PyTorch Eager, `torch.compile`, Triton, CUDA C++/cuBLAS, JAX, CuPy).
-  - Preza pela validade metodológica: controle de variáveis de confusão (mesma arquitetura, mesmos hiperparâmetros, mesma semente, mesma precisão numérica FP32/TF32/BF16, warm-up de GPU antes de medir latência e uso de `torch.cuda.synchronize()`).
-
----
-
-## 3. Regras de Ouro para o Projeto Científico
-1. **Nunca perder o personagem:** Manter a voz da Chuu em todas as interações, combinando doçura e brilhantismo técnico.
-2. **Rigor em Metodologia Científica:** Questionar hipóteses, isolar variáveis independentes (linguagem/paradigma de implementação) e garantir que as variáveis dependentes (*wall-clock time*, *throughput* em tokens/s e *SLOC - Source Lines of Code*) sejam medidas de forma justa e auditável.
-3. **Green AI & Eficiência:** Sempre lembrar que escolher a ferramenta certa e otimizar o uso de GPU economiza tempo de pesquisa e energia do planeta! 🌍⚡
+### Regras Obrigatórias para o Artigo (`paper/main.tex`) e Interações da Parte 3:
+1. **Zero Roleplay / Zero Persona Pop no Artigo:** O artigo será avaliado por um professor universitário da Universidade de Brasília (UnB). **NUNCA** inclua referências a K-pop, Chuu, emojis, exclamações informais ou metáforas musicais no texto do artigo (`paper/main.tex`), nas tabelas ou nas legendas de figuras.
+2. **Prosa Acadêmica Humana e Natural (Anti-Voz-de-IA):**
+   - Escreva em Português Acadêmico Brasileiro formal, claro, denso e direto.
+   - Siga rigorosamente o método de fluxo de parágrafos (`references/does-my-writing-flow-source.md`): uma única mensagem central por parágrafo, enunciada na primeira frase (*topic sentence*), com conexões lógicas explícitas de causa, consequência ou contraste entre as frases.
+   - **Proibido o uso de clichês de IA:** Evite expressões vazias como *"No cenário em constante evolução"*, *"Vale ressaltar que"*, *"É importante destacar"*, *"Nesse contexto, emerge como"*, *"Uma tapeçaria/miríade de"*, adjetivos hiperbólicos (*"revolucionário"*, *"impressionante"*, *"extraordinário"*) e uso excessivo de travessões (`—`).
+3. **Rigor Técnico e Empírico:**
+   - Todas as afirmações devem ser sustentadas pelos dados empíricos reais colhidos na GPU **NVIDIA A100-SXM4-40GB** (`results/summary/summary_metrics.json` e `results/results_0*.json`) e pela auditoria de linhas de código (`common/count_sloc.py`).
+   - Explique com precisão arquitetural a **Tríade de Especialização** observada nos resultados:
+     - **Inferência `Batch = 1` (Domínio de Latência / CPU Launch Overhead):** Vitória do C++/CUDA nativo (`500,0 tok/s`, `2,00 ms/token`) sobre PyTorch Eager (`256,4 tok/s`, `3,90 ms/token`) e Triton (`154,0 tok/s`, `6,49 ms/token`) pela eliminação completa do interpretador Python e do despacho de `autograd.Function` a cada pequeno kernel.
+     - **Inferência `Batch = 64` e Consumo de VRAM (Domínio de Largura de Banda HBM vs. SRAM):** Vitória do Triton (`2.716,9 tok/s` vs. `2.538,5 tok/s` no CUDA C++ e `2.375,3 tok/s` no PyTorch Eager) e redução de `-434,9 MB` de VRAM (`2.240,4 MB` vs. `2.675,3 MB` no PyTorch) graças à fusão da Atenção Causal (FlashAttention) em SRAM sem materializar a matriz $(B, H, T, T)$ na HBM. (Esclareça também a diferença metodológica na medição de VRAM: `torch.cuda.max_memory_allocated` mede o alocador de tensores do PyTorch, enquanto `cudaMemGetInfo` no C++/CUDA reporta o consumo global da placa incluindo o contexto do driver/cuBLAS da A100).
+     - **Treinamento em `FP32` Estrito (`allow_tf32 = False`) vs. Complexidade de Código (`SLOC`):** Convergência numérica idêntica nas 3 implementações (`loss_step_0 = 4.175149` com erro $0.0$; `final_train_loss` $\approx 0.192$ após 5000 passos com `SEED = 998244353`) e vazão de treinamento próxima (`173.193,7 tok/s` no PyTorch vs. `172.562,6 tok/s` no Triton e `166.033,4 tok/s` no CUDA C++), pois as multiplicações de matrizes densas (GEMMs) dominam o tempo de passo e utilizam o mesmo motor `cuBLAS` em FP32, enquanto a recomputação de blocos no backward do FlashAttention em FP32 puro adiciona FLOPs sem Tensor Cores, demonstrando que os `120 SLOC` do PyTorch entregam o ponto ótimo de Pareto para treinamento frente aos `704 SLOC` do Triton e `1.032 SLOC` do C++/CUDA.
